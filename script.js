@@ -5,14 +5,8 @@ document.addEventListener('DOMContentLoaded', function() {
   const taskInput = document.getElementById('task-input');
   const taskList = document.getElementById('task-list');
 
-  // Load tasks from local storage (optional)
-  function loadTasks() {
-    const storedTasks = JSON.parse(localStorage.getItem('tasks') || '[]');
-    storedTasks.forEach(taskText => addTask(taskText, false)); // Don't save again when loading
-  }
-
   // Create the addTask function
-  function addTask(taskText, save = true) {
+  function addTask(taskText) {
     // Get and trim task text
     const taskText = taskInput.value.trim();
 
@@ -41,13 +35,12 @@ document.addEventListener('DOMContentLoaded', function() {
       localStorage.setItem('tasks', JSON.stringify(storedTasks));
     });
 
-    // Add click event listener to checkbox
-    completeCheckbox.addEventListener('click', function() {
-      listItem.classList.toggle('completed'); // Toggle completed class
-    });
+    listItem.appendChild(removeBtn);
+    taskList.appendChild(li);
 
+    taskInput.value = '';
     // Save task to local storage (if applicable)
-    if (save) {
+    if (true) {
       const storedTasks = JSON.parse(localStorage.getItem('tasks') || '[]');
       storedTasks.push(taskText);
       localStorage.setItem('tasks', JSON.stringify(storedTasks));
