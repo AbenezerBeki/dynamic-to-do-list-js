@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // Create the addTask function
   function addTask(taskText, save = true) {
     // Get and trim task text
-    taskText = taskText.value.trim();
+    const taskText = taskInput.value.trim();
 
     // Check if task is empty
     if (taskText === "") {
@@ -41,21 +41,10 @@ document.addEventListener('DOMContentLoaded', function() {
       localStorage.setItem('tasks', JSON.stringify(storedTasks));
     });
 
-    // Create a checkbox for marking tasks as complete
-    const completeCheckbox = document.createElement('input');
-    completeCheckbox.type = 'checkbox';
-    completeCheckbox.classList.add('complete-checkbox');
-
     // Add click event listener to checkbox
     completeCheckbox.addEventListener('click', function() {
       listItem.classList.toggle('completed'); // Toggle completed class
     });
-
-    // Append elements and clear input field
-    listItem.prepend(completeCheckbox);
-    listItem.appendChild(removeButton);
-    taskList.appendChild(listItem);
-    taskInput.value = "";
 
     // Save task to local storage (if applicable)
     if (save) {
