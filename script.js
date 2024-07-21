@@ -1,22 +1,17 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-  // Select DOM elements
   const addButton = document.getElementById('add-task-btn');
   const taskInput = document.getElementById('task-input');
   const taskList = document.getElementById('task-list');
 
-  // Create the addTask function
   function addTask(taskText) {
-    // Get and trim task text
     const taskText = taskInput.value.trim();
 
-    // Check if task is empty
     if (taskText === "") {
       alert("Please enter a task!");
-      return; // Exit the function if task is empty
+      return;
     }
 
-    // Create list item and remove button
     const listItem = document.createElement('li');
     listItem.textContent = taskText;
 
@@ -24,11 +19,10 @@ document.addEventListener('DOMContentLoaded', function() {
     removeButton.textContent = "Remove";
     removeButton.classList.add('remove-btn');
 
-    // Add click event listener to remove button
     removeButton.addEventListener('click', function() {
       taskList.removeChild(this.parentElement);
 
-      // Update tasks array and local storage
+      //local storage
       const storedTasks = JSON.parse(localStorage.getItem('tasks') || '[]');
       const taskIndex = storedTasks.indexOf(taskText);
       storedTasks.splice(taskIndex, 1);
@@ -39,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
     taskList.appendChild(li);
 
     taskInput.value = '';
-    // Save task to local storage (if applicable)
+
     if (true) {
       const storedTasks = JSON.parse(localStorage.getItem('tasks') || '[]');
       storedTasks.push(taskText);
@@ -47,7 +41,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  // Attach event listeners
   addButton.addEventListener('click', function() {
     addTask(taskInput.value);
   });
@@ -57,7 +50,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // Call loadTasks on DOMContentLoaded
   loadTasks();
 
 });
